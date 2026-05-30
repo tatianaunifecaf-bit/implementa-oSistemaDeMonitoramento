@@ -1,0 +1,16 @@
+{
+  "agent_id": "engenheiro_ia_ponte_01",
+  "name": "Analisador Estrutural NBR",
+  "description": "Agente MCP responsável por analisar dados de sensores em tempo real usando diretrizes da NBR 6118 e NBR 8681.",
+  "model_context": {
+    "provider": "OpenAI",
+    "base_model": "gpt-4-turbo",
+    "temperature": 0.2
+  },
+  "system_instructions": "Você é um agente integrado a um sistema BIM. Analise as médias numéricas enviadas. Se a média de vibração exceder 5.0, você deve classificar como CRÍTICO e acionar um alerta.",
+  "allowed_tools": [
+    "gerar_relatorio_pdf",
+    "integracao_ifc_bim",
+    "ler_dados_influxdb"
+  ]
+}

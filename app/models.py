@@ -1,35 +1,20 @@
-"""
-JSON que servirá para evitar gargalo no processamento de big data, dessa forma garantindo que a latência maxima de 5 minutos será respeitada.
-{
-  "timestamp_envio": "2026-05-25T18:40:00Z",
-  "ponte_id": 12,
-  "leituras": [
-    {
-      "sensor_id": "ACEL-001",
-      "tipo": "acelerometro",
-      "valores": [0.012, 0.015, 0.011]
-    },
-    {
-      "sensor_id": "EXT-045",
-      "tipo": "extensometro",
-      "valores": [152.4]
-    }
-  ]
-} 
-
-O que temos aqui em cima é como os arquivos .JSON serão carregados e lidos, dessa forma acelerando e evitando que eles fiquem cheios
-"""
+# app/models.py
 from pydantic import BaseModel, Field
 from typing import List
 from datetime import datetime
 
 class LeituraSensor(BaseModel):
-    sensor_id: str = Field(..., example="ACEL-001")
-    tipo: str = Field(..., example="acelerometro") 
-    valores: List[float] = Field(..., description="Lista de métricas coletadas no intervalo de tempo")
-    # Classe para guardar a leitura dos sensores
+    sensor_id: str = Field(..., description="ID do sensor")
+    tipo: str = Field(..., description="Tipo do sensor (ex: acelerometro)")
+    valores: List[float] = Field(..., description="Lista de leituras numéricas")
 
 class LoteDadosPonte(BaseModel):
-    timestamp_envio: datetime
-    ponte_id: int = Field(..., ge=1, le=15) # Restrito às 15 pontes do projeto 
-    pacote_leituras: List[LeituraSensor]
+    timestamp_envio: str = Field(..., description="Timestamp do envio")
+    ponte_id: int = Field(..., description="ID da ponte (1 a 15)", ge=1, le=15)
+    pacote_leituras: List[LeituraSensor] = Field(..., description="Lista de leituras")
+
+class DiagnosticoPonte(BaseModel):
+    ponte_id: int
+    status_estrutura: str
+    anomalia_detectada: bool
+    ia_analise_detalhada: str
