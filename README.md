@@ -22,7 +22,7 @@ A análise automatizada é estritamente embasada nas normas técnicas:
 
 ---
 
-## 💻 Instruções de Instalação e Execução
+## Instruções de Instalação e Execução
 
 ### 1. Preparação do Ambiente
 Abra o seu terminal e execute os comandos abaixo para criar a estrutura do projeto e o ambiente virtual:
